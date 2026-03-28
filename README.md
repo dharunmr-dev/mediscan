@@ -2,8 +2,9 @@
 ## Problem statement
 Healthcare systems operate on fragmented and heterogeneous medical records, including handwritten prescriptions, printed reports, and unstructured digital documents. This fragmentation results in poor accessibility of patient information, increased risk of data inconsistency, and delays in clinical decision-making. Existing approaches rely heavily on manual digitization methods such as scanning and data entry, which are time-consuming, error-prone, and incapable of extracting structured and usable medical data efficiently. Consequently, there is a critical need for an intelligent and automated system that can transform unstructured medical records into structured, unified, and accessible patient health information within a centralized framework.
 
-## Architecture diagram
-<img width="800" height="1200" alt="arch-diagram-v0 1-light" src="https://github.com/user-attachments/assets/721e2570-6f10-41c3-b86f-b348345a25dc" />
+## Architecture diagram <!-- set width = 800, height = 1200 -->
+<img width="800" height="1200" alt="arch-diagram-v1 0-dark" src="https://github.com/user-attachments/assets/3a76382a-2da4-4b16-b699-7cd9e71faf21" />
+
 
 ## Raspberry Pi 
 **hostname** aka machine name is `dharun-rasbpi`.
