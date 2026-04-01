@@ -26,9 +26,13 @@ This is the model currently being tested and performing well on prescriptions so
    ```
    uv venv --python 3.11.14 mlx-vlm
    ```
-   activate the environment
+   Activate the environment
    ```
    source mlx-vlm/bin/activate
+   ```
+   Deactivate the environment
+   ```
+   deactivate
    ```
 
 #### 3. MLX-VLM
