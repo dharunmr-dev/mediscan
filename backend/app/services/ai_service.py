@@ -41,7 +41,7 @@ async def extract_prescription(
         async with aiohttp.ClientSession() as session:
             async with session.post(
                 f"{settings.ai_server_url}/extract",
-                json={"image_path": image_path},
+                json={"image_path": image_path, "prompt": PROMPT},
                 timeout=aiohttp.ClientTimeout(total=settings.ai_timeout),
             ) as response:
                 if response.status != 200:
