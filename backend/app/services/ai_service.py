@@ -127,6 +127,7 @@ async def extract_prescription(
 
                     return {
                         "success": True,
+                        "extracted_text": raw_output,
                         "patient_name": patient_name,
                         "patient_age": patient_age,
                         "patient_gender": patient_gender,

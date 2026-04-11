@@ -70,6 +70,9 @@ class PrescriptionResponse(BaseModel):
     instructions: Optional[str]
     diagnosed_by: Optional[str]
     extracted_at: datetime
+    patient_name: Optional[str] = None
+    patient_age: Optional[int] = None
+    patient_gender: Optional[str] = None
 
     model_config = {"from_attributes": True}
 

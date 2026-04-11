@@ -479,26 +479,46 @@ async def get_prescriptions_by_patient(
     async with aiosqlite.connect(DB_PATH) as db:
         db.row_factory = aiosqlite.Row
         async with db.execute(
-            "SELECT * FROM prescriptions WHERE patient_id = ? ORDER BY extracted_at DESC",
+            """SELECT p.*, pat.name as patient_name, pat.age as patient_age, pat.gender as patient_gender 
+               FROM prescriptions p 
+               LEFT JOIN patients pat ON p.patient_id = pat.id 
+               WHERE p.patient_id = ? 
+               ORDER BY p.extracted_at DESC""",
             (patient_id,),
         ) as cursor:
             rows = await cursor.fetchall()
 
     prescriptions = []
     for row in rows:
+        diagnosis_val = (
+            row["diagnosis"] if "diagnosis" in row.keys() and row["diagnosis"] else None
+        )
+        outpatient_no_val = (
+            row["outpatient_no"]
+            if "outpatient_no" in row.keys() and row["outpatient_no"]
+            else None
+        )
+
         prescriptions.append(
             schema.PrescriptionResponse(
                 id=row["id"],
                 patient_id=row["patient_id"],
                 image_id=row["image_id"],
                 extracted_text=row["extracted_text"],
-                diagnosis=row.get("diagnosis"),
-                outpatient_no=row.get("outpatient_no"),
+                diagnosis=diagnosis_val,
+                outpatient_no=outpatient_no_val,
                 medicines=row["medicines"],
                 dosage=row["dosage"],
                 instructions=row["instructions"],
                 diagnosed_by=row["diagnosed_by"],
                 extracted_at=datetime.fromisoformat(row["extracted_at"]),
+                patient_name=row["patient_name"]
+                if "patient_name" in row.keys()
+                else None,
+                patient_age=row["patient_age"] if "patient_age" in row.keys() else None,
+                patient_gender=row["patient_gender"]
+                if "patient_gender" in row.keys()
+                else None,
             )
         )
     return prescriptions
