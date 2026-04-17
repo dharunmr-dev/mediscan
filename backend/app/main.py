@@ -1,6 +1,7 @@
 import json
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from app.api.routes import router
 from app.services.database import init_db
@@ -26,6 +27,15 @@ app = FastAPI(
 )
 
 app.include_router(router)
+
+# Add CORS middleware (for teammates to access)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 # Root endpoint (test)
